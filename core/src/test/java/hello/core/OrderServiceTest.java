@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 public class OrderServiceTest {
 
-    MemberService memberService =  new MemeberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberService memberService =  new MemeberServiceImpl(memberRepository);
+    OrderService orderService = new OrderServiceImpl(memberRepository, discountPolicy);
 
     @Test
     void createOrder(){
