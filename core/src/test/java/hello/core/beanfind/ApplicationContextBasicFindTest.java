@@ -47,6 +47,7 @@ public class ApplicationContextBasicFindTest {
     void findBeanByNameX() {
 
         org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class, () ->ac.getBean("XXXX", MemberService.class));
+       // org.junit.jupiter.api.Assertions.assertThrows()
     }
 }
 
