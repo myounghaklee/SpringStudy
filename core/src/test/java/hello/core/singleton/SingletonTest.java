@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class SingletonTest {
 
     @Test
@@ -22,7 +24,7 @@ public class SingletonTest {
         System.out.println("memberService1 = " + memberService1);
         System.out.println("memberService2 = " + memberService2);
 
-        Assertions.assertThat(memberService1).isNotSameAs(memberService2);
+        assertThat(memberService1).isNotSameAs(memberService2);
     }
 
 
@@ -35,10 +37,10 @@ public class SingletonTest {
         System.out.println("ss1 = " + ss1);
         System.out.println("ss2 = " + ss2);
 
-        Assertions.assertThat(ss1).isNotSameAs(ss2);
+        assertThat(ss1).isSameAs(ss2);
 
         //same ==  대상의 주소값을 비교 참조랑 비교
-        //equal ==  대상의 내용을 비교 
+        //equal ==  대상의 내용을 비교
     }
 
 }
