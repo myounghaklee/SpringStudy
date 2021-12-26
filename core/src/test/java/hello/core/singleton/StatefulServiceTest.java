@@ -24,9 +24,9 @@ class StatefulServiceTest {
         st2.order("userB", 20000);
 
         //TreadA: 사용자A 주문금핵 조회
-        int price = st1.getPrice();
-        System.out.println("price = " + price);
-        org.assertj.core.api.Assertions.assertThat(st1.getPrice()).isEqualTo(20000);
+        //int price = st1.getPrice();
+        System.out.println("price = " + st1);
+        org.assertj.core.api.Assertions.assertThat(st1).isNotEqualTo(20000);
     }
 
     static class TestConfig{
