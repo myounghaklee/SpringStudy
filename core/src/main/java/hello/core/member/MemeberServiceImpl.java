@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class MemeberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
+
     @Autowired
     public MemeberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
