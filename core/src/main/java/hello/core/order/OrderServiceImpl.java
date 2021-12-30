@@ -28,8 +28,10 @@ public class OrderServiceImpl implements OrderService{
         this.memberRepository = memberRepository;
     }
 
-
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("discountPolicy  :" + discountPolicy );
+        System.out.println("memberRepo : " + memberRepository);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
