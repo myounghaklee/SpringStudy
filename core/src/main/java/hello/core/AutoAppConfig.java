@@ -18,7 +18,7 @@ basePackage를 안주면 소스의 패키지인 hello.core 하위를 전부 sear
  */
 @Configuration
 @ComponentScan(
-        basePackages = "hello.core.member",
+
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
 public class AutoAppConfig {

@@ -10,31 +10,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
-    private  MemberRepository memberRepository;
+    @Autowired  private  MemberRepository memberRepository;
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    private   DiscountPolicy discountPolicy;
+    @Autowired private   DiscountPolicy discountPolicy;
 
-    //수정자 주입
-    @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
-        System.out.println("discountPolicy  :" + discountPolicy );
-        this.discountPolicy = discountPolicy;
-    }
-
-    //수정자 주입
-    @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
-        System.out.println("memberReopop : " + memberRepository);
-        this.memberRepository = memberRepository;
-    }
-
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("discountPolicy  :" + discountPolicy );
-        System.out.println("memberRepo : " + memberRepository);
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    //수정자 주입
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        System.out.println("discountPolicy  :" + discountPolicy );
+//        this.discountPolicy = discountPolicy;
+//    }
+//
+//    //수정자 주입
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        System.out.println("memberReopop : " + memberRepository);
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        System.out.println("discountPolicy  :" + discountPolicy );
+//        System.out.println("memberRepo : " + memberRepository);
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
 
     @Override
