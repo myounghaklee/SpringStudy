@@ -24,11 +24,11 @@ basePackage를 안주면 소스의 패키지인 hello.core 하위를 전부 sear
 public class AutoAppConfig {
 
 
-    @Bean(name = "memoryMemberRepository")
-    MemberRepository memberRepository(){
-
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name = "memoryMemberRepository")
+//    MemberRepository memberRepository(){
+//
+//        return new MemoryMemberRepository();
+//    }
 
 
 

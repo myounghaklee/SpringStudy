@@ -14,24 +14,30 @@ public class OrderServiceImpl implements OrderService{
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
      private   DiscountPolicy discountPolicy;
 
-    //수정자 주입
-    @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
-        System.out.println("discountPolicy  :" + discountPolicy );
-        this.discountPolicy = discountPolicy;
-    }
+//    //수정자 주입
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        System.out.println("discountPolicy  :" + discountPolicy );
+//        this.discountPolicy = discountPolicy;
+//    }
+//
+//    //수정자 주입
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        System.out.println("memberReopop : " + memberRepository);
+//        this.memberRepository = memberRepository;
+//    }
 
-    //수정자 주입
-    @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
-        System.out.println("memberReopop : " + memberRepository);
-        this.memberRepository = memberRepository;
-    }
-
-    @Autowired
+    //@Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("discountPolicy  :" + discountPolicy );
         System.out.println("memberRepo : " + memberRepository);
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+    @Autowired
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
