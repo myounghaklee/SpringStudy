@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
     private  final MemberRepository memberRepository;
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
      private  final DiscountPolicy discountPolicy;
 
-    //수정자 주입
+    //수정자 주입oo
 //    @Autowired
 //    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
 //        System.out.println("discountPolicy  :" + discountPolicy );
@@ -30,13 +30,13 @@ public class OrderServiceImpl implements OrderService{
 //        this.memberRepository = memberRepository;
 //    }
 
-//    @Autowired
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        System.out.println("discountPolicy  :" + discountPolicy );
-//        System.out.println("memberRepo : " + memberRepository);
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("discountPolicy  :" + discountPolicy );
+        System.out.println("memberRepo : " + memberRepository);
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
 //    @Autowired
 //    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
