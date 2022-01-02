@@ -8,13 +8,33 @@ group = 'hello'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+
+//lombook 설정 추가 시작
+configurations{
+	compileOnly{
+		extendsFrom annotationProcessor
+	}
+}
+//lombook 설정 추가 끝
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//lombook 라이브러리 추가 시작
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+
+	testImplementation ('org.springframework.boot:spring-boot-starter-test'){
+		exclude group: 'org.juiit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 test {
