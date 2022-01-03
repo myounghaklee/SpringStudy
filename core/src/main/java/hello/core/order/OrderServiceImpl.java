@@ -31,11 +31,11 @@ public class OrderServiceImpl implements OrderService{
 //    }
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("discountPolicy  :" + discountPolicy );
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {
+        System.out.println("discountPolicy  :" + rateDiscountPolicy );
         System.out.println("memberRepo : " + memberRepository);
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy =  rateDiscountPolicy;
     }
 
 //    @Autowired
