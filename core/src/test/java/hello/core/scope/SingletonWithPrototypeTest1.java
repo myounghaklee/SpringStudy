@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 public class SingletonWithPrototypeTest1 {
 
@@ -23,8 +24,14 @@ public class SingletonWithPrototypeTest1 {
 
         @PostConstruct
         public void init(){
-            System.out.println("cnt === : " + cnt);
+            System.out.println("cnt === : " + this);
         }
+
+        @PreDestroy
+        public void destroy(){
+            System.out.println("destroy======");
+        }
+
 
 
     }
