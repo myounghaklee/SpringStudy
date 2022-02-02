@@ -23,6 +23,7 @@ public class Order {
     @JoinColumn(name = "memeber_id")
     private Member member;
 
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private Delivery delivery;
