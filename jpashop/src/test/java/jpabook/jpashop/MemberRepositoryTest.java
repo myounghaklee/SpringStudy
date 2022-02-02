@@ -14,24 +14,24 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MemberRepositoryTest {
-    @Autowired MemberRepository mr;
-
-
-
-    @Test
-    @Transactional
-    @Rollback(false)
-    public void testMember() throws Exception{
-        //given
-        Member m = new Member();
-        m.setUsername("memberA");
-        //when
-        Long savaId = mr.save(m);
-        Member findMember = mr.find(savaId);
-        //then
-        Assertions.assertThat(findMember.getId()).isEqualTo(m.getId());
-        Assertions.assertThat(findMember.getUsername()).isEqualTo(m.getUsername());
-        Assertions.assertThat(findMember).isEqualTo(m);
-    }
+//    @Autowired MemberRepository mr;
+//
+//
+//
+//    @Test
+//    @Transactional
+//    @Rollback(false)
+//    public void testMember() throws Exception{
+//        //given
+//        Member m = new Member();
+//        m.setUsername("memberA");
+//        //when
+//        Long savaId = mr.save(m);
+//        Member findMember = mr.find(savaId);
+//        //then
+//        Assertions.assertThat(findMember.getId()).isEqualTo(m.getId());
+//        Assertions.assertThat(findMember.getUsername()).isEqualTo(m.getUsername());
+//        Assertions.assertThat(findMember).isEqualTo(m);
+//    }
 
 }
