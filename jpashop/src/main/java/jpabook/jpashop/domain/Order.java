@@ -23,10 +23,21 @@ public class Order {
     @JoinColumn(name = "memeber_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
+    /*
+    // cascase 안쓴경우
+    persist(itemA)
+    persist(itemB)
+    persist(itemC)
+    persist(order)
 
-    @OneToOne(fetch =  FetchType.LAZY)
+    // cascade 쓴경우
+    persist(order) 만 해도 된다.
+
+     */
+
+    @OneToOne(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -34,6 +45,23 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status ; //주문상태[Order, Cancle]
+
+    //연관관계 메서드
+    public void memeber(Member member){
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
+
 
 
 }
