@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public class MemberRepository {
-
+    //@PersistenceContext 기능
+    // JPA의 EntityManager를 빈에 주입해준다.
     @PersistenceContext
     private EntityManager em;
 
