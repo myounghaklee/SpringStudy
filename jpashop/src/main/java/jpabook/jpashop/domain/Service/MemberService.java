@@ -4,6 +4,8 @@ import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
@@ -20,7 +22,19 @@ public class MemberService {
 
     private void validateDuplicateMember(Member member) {
         //exception
+        List<Member> findMembers = memberRepository.findByName(member.getName());
+        if(!findMembers.isEmpty()){
+            throw  new IllegalStateException("이미 존재하는 회원입니다. ");
+        }
     }
 
     //전체회원 조회
+    public List<Member> fimdMembers(){
+        return memberRepository.findAll();
+    }
+
+    //회원 단건 조회
+    public Member findOne(Long memberId){
+        return memberRepository.fineOne(memberId);
+    }
 }
