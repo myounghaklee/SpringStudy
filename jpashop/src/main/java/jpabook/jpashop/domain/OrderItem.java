@@ -27,5 +27,13 @@ public class OrderItem {
     private int count;//주문 수량
 
 
+    public void cancle() {
+        getItem().addStock(count);
 
+    }
+
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+
+    }
 }

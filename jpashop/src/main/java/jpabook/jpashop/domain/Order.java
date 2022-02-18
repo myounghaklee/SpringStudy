@@ -65,7 +65,7 @@ public class Order {
     //생성 메서드//
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems){
         Order order = new Order();
-        order.setMember(member;
+        order.setMember(member);
         order.setDelivery(delivery);
         for(OrderItem or : orderItems){
             order.addOrderItem(or);
@@ -73,14 +73,37 @@ public class Order {
 
         order.setStatus(OrderStatus.ORDER);
         order.setOrderDate(LocalDateTime.now());
-        return oreder;
+        return order;
 
     }
 
     //비즈니스 로직
     /*
-    주문 취소 
+    주문 취소
      */
+    public void cancle(){
+        if(delivery.getStatus() == DeliveryStatus.COMPlETE){
+            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
+        }
+
+        this.setStatus(OrderStatus.CANCLE);
+        for(OrderItem or : orderItems){
+            or.cancle();
+        }
+    }
+
+    //조회
+    /*
+    전체 주문가격 조회
+     */
+    public int getTotalPrice(){
+//        int totalPrice =0;
+//        for(OrderItem or : orderItems){
+//            totalPrice+= or.getTotalPrice();
+//        }
+//        return totalPrice;
+        return orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
+    }
 
 
 
