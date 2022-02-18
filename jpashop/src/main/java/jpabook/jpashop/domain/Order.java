@@ -62,6 +62,26 @@ public class Order {
         delivery.setOrder(this);
     }
 
+    //생성 메서드//
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems){
+        Order order = new Order();
+        order.setMember(member;
+        order.setDelivery(delivery);
+        for(OrderItem or : orderItems){
+            order.addOrderItem(or);
+        }
+
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return oreder;
+
+    }
+
+    //비즈니스 로직
+    /*
+    주문 취소 
+     */
+
 
 
 }
