@@ -10,7 +10,6 @@ import javax.persistence.Id;
 
 
 public enum OrderStatus {
-    ORDER, CANCLE
-
+    ORDER, CANCEL, CANCLE
 
 }
