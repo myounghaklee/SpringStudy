@@ -19,6 +19,8 @@ public class ItemUpdateTest {
     public void () throws Exception{
         //given
         Book book = em.find(Book.class, 1L);
+        //tx
+        book.setName("testtest");
         //when
 
         //then
