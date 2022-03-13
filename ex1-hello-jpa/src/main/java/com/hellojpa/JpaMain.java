@@ -18,17 +18,22 @@ public class JpaMain {
         try{
 
 //            Member findMember = em.find(Member.class, 1L);
-            List<Member> memberList = em.createQuery("select m from Member as m", Member.class).getResultList();
-            for(Member m : memberList){
-                System.out.println("findMember : " + m.getName());
-            }
-
+//            List<Member> memberList = em.createQuery("select m from Member as m", Member.class).getResultList();
+//            for(Member m : memberList){
+//                System.out.println("findMember : " + m.getName());
+//            }
 //            Member m = new Member();
 //            m.setId(1L);
 //            m.setName("hak");
 
 //            em.persist(m);
-            tx.commit();
+            Member m1 = new Member(10L, "mingu");
+            Member m2 = new Member(11L, "minho");
+            em.persist(m1);
+            em.persist(m2);
+            System.out.println("!!!!!!!!!!!");
+            tx.commit(); //commit시점에 DB저장됨
+            System.out.println("-------------");
         }catch(Exception e){
             tx.rollback();
         }finally {
