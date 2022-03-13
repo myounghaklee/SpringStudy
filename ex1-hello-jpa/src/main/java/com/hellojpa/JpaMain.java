@@ -17,7 +17,7 @@ public class JpaMain {
 
         try{
 
-//            Member findMember = em.find(Member.class, 1L);
+            Member findMember = em.find(Member.class, 1L);
 //            List<Member> memberList = em.createQuery("select m from Member as m", Member.class).getResultList();
 //            for(Member m : memberList){
 //                System.out.println("findMember : " + m.getName());
@@ -27,10 +27,9 @@ public class JpaMain {
 //            m.setName("hak");
 
 //            em.persist(m);
-            Member m1 = new Member(10L, "mingu");
-            Member m2 = new Member(11L, "minho");
-            em.persist(m1);
-            em.persist(m2);
+            findMember.setName("fkfkfkfkk");
+//            em.persist(m1);
+//            em.persist(m2);
             System.out.println("!!!!!!!!!!!");
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
