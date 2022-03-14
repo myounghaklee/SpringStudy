@@ -27,9 +27,10 @@ public class JpaMain {
 //            m.setName("hak");
 
 //            em.persist(m);
-            findMember.setName("fkfkfkfkk");
+            findMember.setName("fkfkfkfkㅏㅏㅏㅏk");
 //            em.persist(m1);
 //            em.persist(m2);
+            em.flush();
             System.out.println("!!!!!!!!!!!");
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
