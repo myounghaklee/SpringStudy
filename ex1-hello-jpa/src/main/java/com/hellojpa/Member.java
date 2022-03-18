@@ -19,6 +19,9 @@ public class Member {
     private Date lastModifiedDate;
     @Lob
     private String description;
+
+    @Transient
+    private int temp; 
     /* 생성자*/
     public Member(){
 

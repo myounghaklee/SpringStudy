@@ -27,7 +27,7 @@ public class JpaMain {
 //            m.setName("hak");
 
 //            em.persist(m);
-            findMember.setName("fkfkfkfkㅏㅏㅏㅏk");
+            findMember.setName("fkfkfkfkk");
 //            em.persist(m1);
 //            em.persist(m2);
             em.flush();
