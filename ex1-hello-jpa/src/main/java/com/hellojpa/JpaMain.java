@@ -17,9 +17,9 @@ public class JpaMain {
 
         try{
             Member m = new Member();
-            m.setId(2L);
+
             m.setUsername("lee");
-            m.setRoleType(RoleType.GUEST);
+
             em.persist(m);
             System.out.println("!!!!!!!!!!!");
             tx.commit(); //commit시점에 DB저장됨
