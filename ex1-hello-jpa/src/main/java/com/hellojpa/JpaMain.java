@@ -18,10 +18,11 @@ public class JpaMain {
         try{
             Member m = new Member();
 
-            m.setUsername("lee");
+            m.setUsername("kim");
+            System.out.println("!!!!!!!!!!!");
 
             em.persist(m);
-            System.out.println("!!!!!!!!!!!");
+
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
         }catch(Exception e){
