@@ -16,13 +16,15 @@ public class JpaMain {
         tx.begin();
 
         try{
-//            Member m = new Member();
-//
-//            m.setUsername("A");
-//            System.out.println("!!!!!!!!!!!");
-//
-//            em.persist(m);
-//            System.out.println("MEM ID : " + m.getId());
+
+            Team t = new Team();
+            t.setName("teamA");
+            em.persist(t);
+
+            Member m = new Member();
+            m.setName("member1");
+            m.setTeamId(t.getId());
+            em.persist(m);
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
         }catch(Exception e){
