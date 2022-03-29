@@ -15,9 +15,11 @@ public class Member {
     private String name;
     private int age;
 
-    @Column(name = "TEAM_ID")
-    private Long teamId;
-
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
     /* 생성자*/
     public Member(){
 
