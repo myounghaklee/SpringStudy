@@ -16,15 +16,19 @@ public class JpaMain {
         tx.begin();
 
         try{
-
+            //ㅈㅓ장
             Team t = new Team();
             t.setName("teamA");
             em.persist(t);
 
             Member m = new Member();
             m.setName("member1");
-            m.setTeamId(t.getId());
+            m.setTeam(t);
             em.persist(m);
+            Member findMember = em.find(Member.class, m.getId());
+
+            Team findTeam = findMember.getTeam();
+
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
         }catch(Exception e){

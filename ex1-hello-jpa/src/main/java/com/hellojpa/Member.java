@@ -20,6 +20,15 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     /* 생성자*/
     public Member(){
 
@@ -50,11 +59,5 @@ public class Member {
         this.age = age;
     }
 
-    public Long getTeamId() {
-        return teamId;
-    }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
-    }
 }
