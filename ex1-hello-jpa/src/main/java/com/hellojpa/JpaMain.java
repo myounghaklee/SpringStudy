@@ -25,9 +25,16 @@ public class JpaMain {
             m.setName("member1");
             m.setTeam(t);
             em.persist(m);
-            Member findMember = em.find(Member.class, m.getId());
+            em.flush();
+            em.clear();
 
-            Team findTeam = findMember.getTeam();
+            Member findMember = em.find(Member.class, m.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for(Member m1 : members){
+                System.out.println("m1 =  : " + m1.getName());
+            }
+            //Team findTeam = findMember.getTeam();
 
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
