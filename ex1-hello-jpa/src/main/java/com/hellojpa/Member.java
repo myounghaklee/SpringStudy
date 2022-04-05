@@ -13,13 +13,11 @@ public class Member {
 
     @Column(name = "USERNAME")
     private String name;
-    private int age;
-
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+    private int age;
+
 
     public Team getTeam() {
         return team;
