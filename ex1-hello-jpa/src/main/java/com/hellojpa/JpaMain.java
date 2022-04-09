@@ -15,6 +15,7 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
+        
         try{
            Member m = new Member();
            m.setName("MEMBER1");
