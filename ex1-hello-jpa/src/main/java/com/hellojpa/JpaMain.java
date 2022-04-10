@@ -15,16 +15,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        
-        try{
-           Member m = new Member();
-           m.setName("MEMBER1");
-           em.persist(m);
 
-           Team t = new Team();
-           t.setName("TEAMa");
-           t.getMembers().add(m);
-           em.persist(t);
+        try{
+            Movie movie = new Movie();
+            movie.setDirector("AAAA");
+            movie.setActor("BBBB");
+            movie.setName("야차");
+            movie.setPrice(10000);
+            em.persist(movie);
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
         }catch(Exception e){
