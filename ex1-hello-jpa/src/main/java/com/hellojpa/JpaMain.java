@@ -17,6 +17,7 @@ public class JpaMain {
 
 
         try{
+
             Movie movie = new Movie();
             movie.setDirector("AAAA");
             movie.setActor("BBBB");

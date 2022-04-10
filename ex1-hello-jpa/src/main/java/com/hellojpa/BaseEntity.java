@@ -9,7 +9,7 @@ public class BaseEntity {
     private String lastModifiedBy;
     private LocalDateTime lastModifiedDate;
 
-    
+
     public String getCreateBhy() {
         return createBy;
     }
