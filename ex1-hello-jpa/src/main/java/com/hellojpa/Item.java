@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "DTYPE")
 public class Item extends BaseEntity{
     @Id @GeneratedValue
     private Long id;
