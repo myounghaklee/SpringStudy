@@ -1,16 +1,22 @@
 package com.hellojpa;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
-public class Item extends BaseEntity{
+public abstract class Item extends BaseEntity{
     @Id @GeneratedValue
+    @Column(name = "ITEM_ID")
     private Long id;
 
     private String name;
     private int price;
+    private int stockQuantity;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
 
     public Long getId() {
         return id;
