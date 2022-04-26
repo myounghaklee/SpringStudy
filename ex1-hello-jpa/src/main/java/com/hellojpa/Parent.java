@@ -1,8 +1,8 @@
 package com.hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Parent {
@@ -10,6 +10,14 @@ public class Parent {
     @GeneratedValue
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Child> childList = new ArrayList<>();
+
+    public void addChild(Child c){
+        childList.add(c);
+        c.setParent(this);
+    }
 
     public Long getId() {
         return id;
