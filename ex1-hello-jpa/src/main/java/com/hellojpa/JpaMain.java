@@ -17,20 +17,17 @@ public class JpaMain {
 
 
         try{
+            Child c1 = new Child();
+            Child c2 = new Child();
 
-            Movie movie = new Movie();
-            movie.setDirector("AAAA");
-            movie.setActor("BBBB");
-            movie.setName("야차");
-            movie.setPrice(10000);
-            em.persist(movie);
+            Parent p = new Parent();
+            p.addChild(c1);
+            p.addChild(c2);
 
-            //조회준비
-            em.flush();
-            em.clear();
-            //조회
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("-======findMovie : " + findMovie);
+            em.persist(p);
+//            em.persist(c1);
+//            em.persist(c2);
+
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
         }catch(Exception e){
