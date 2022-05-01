@@ -15,9 +15,11 @@ public class Member{
     @Column(name = "USERNAME")
     private String name;
     //Period
+    @Embedded
     private Period workPeriod;
 
     //Address
+    @Embedded
     private Address homeAddress;
 
 }
