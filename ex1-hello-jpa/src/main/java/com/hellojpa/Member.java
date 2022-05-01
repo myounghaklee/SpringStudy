@@ -14,12 +14,10 @@ public class Member{
 
     @Column(name = "USERNAME")
     private String name;
+    //Period
+    private Period workPeriod;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-
-    private String city;
-    private String street;
-    private String zipcode;
+    //Address
+    private Address homeAddress;
 
 }
