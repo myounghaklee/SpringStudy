@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-public class Member  extends BaseEntity{
+public class Member{
 
     @Id
     @GeneratedValue
@@ -15,6 +15,11 @@ public class Member  extends BaseEntity{
     @Column(name = "USERNAME")
     private String name;
 
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    private String city;
+    private String street;
+    private String zipcode;
+
 }
