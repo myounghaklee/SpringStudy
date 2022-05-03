@@ -2,7 +2,7 @@ package com.hellojpa;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 public class Member{
@@ -22,16 +22,14 @@ public class Member{
     @Embedded
     private Address homeAddress;
 
-    //주소
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "WORK_CITY")),
-            @AttributeOverride(name = "street", column = @Column(name = "WORK_STREET")),
-            @AttributeOverride(name = "zipcode", column = @Column(name = "WORK_ZIPCODE")),
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
 
-    })
-    private Address workAddress;
-
+    @ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    private List<Address> addressHistory = new ArrayList<>();
     public Member() {
     }
 
