@@ -17,17 +17,9 @@ public class JpaMain {
 
 
         try{
-            Child c1 = new Child();
-            Child c2 = new Child();
-
-            Parent p = new Parent();
-            p.addChild(c1);
-            p.addChild(c2);
-
-            em.persist(p);
-//            em.persist(c1);
-//            em.persist(c2);
-
+           Member member = new Member();
+           member.setName("member1");
+           member.setHomeAddress(new Address("homeCity", "street", "zip"));
             tx.commit(); //commit시점에 DB저장됨
             System.out.println("-------------");
         }catch(Exception e){

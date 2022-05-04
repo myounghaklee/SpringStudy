@@ -65,11 +65,5 @@ public class Member{
         this.homeAddress = homeAddress;
     }
 
-    public Address getWorkAddress() {
-        return workAddress;
-    }
 
-    public void setWorkAddress(Address workAddress) {
-        this.workAddress = workAddress;
-    }
 }
