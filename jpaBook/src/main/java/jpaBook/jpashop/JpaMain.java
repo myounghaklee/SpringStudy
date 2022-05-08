@@ -17,9 +17,7 @@ public class JpaMain {
 
         tx.begin();
         try{
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
-            
+            em.createQuery();
             tx.commit();
         }catch (Exception e ){
             tx.rollback();
