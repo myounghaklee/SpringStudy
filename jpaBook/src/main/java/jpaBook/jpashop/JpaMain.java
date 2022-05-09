@@ -1,5 +1,6 @@
 package jpaBook.jpashop;
 
+import jpaBook.jpashop.domain.Member;
 import jpaBook.jpashop.domain.Order;
 import jpaBook.jpashop.domain.OrderItem;
 
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -17,7 +19,12 @@ public class JpaMain {
 
         tx.begin();
         try{
-            em.createQuery("select c from member");
+            List<Member> result = em.createQuery("select m From Member m where m.name like '%kim%'", Member.class)
+                    .getResultList();
+
+            for(Member m : result){
+                System.out.println("member = "  + m);
+            }
             tx.commit();
         }catch (Exception e ){
             tx.rollback();
