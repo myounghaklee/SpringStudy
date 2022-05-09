@@ -17,7 +17,7 @@ public class JpaMain {
 
         tx.begin();
         try{
-            em.createQuery();
+            em.createQuery("select c from member");
             tx.commit();
         }catch (Exception e ){
             tx.rollback();
