@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class JpaMain {
@@ -19,12 +22,12 @@ public class JpaMain {
 
         tx.begin();
         try{
-            List<Member> result = em.createQuery("select m From Member m where m.name like '%kim%'", Member.class)
-                    .getResultList();
+            //Criteria 사용 준비
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
 
-            for(Member m : result){
-                System.out.println("member = "  + m);
-            }
+            Root<Member> m = query.from(Member.class);
+            query.select(m).where()
             tx.commit();
         }catch (Exception e ){
             tx.rollback();
