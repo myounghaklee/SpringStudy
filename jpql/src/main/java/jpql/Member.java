@@ -10,7 +10,7 @@ public class Member {
     private int age;
 
     @ManyToOne
-    @JoinColumn("TEAM_ID")
+    @JoinColumn(name="TEAM_ID")
     private Team team;
 
     public Long getId() {
