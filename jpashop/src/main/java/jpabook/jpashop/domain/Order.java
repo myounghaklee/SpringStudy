@@ -1,8 +1,6 @@
 package jpabook.jpashop.domain;
 
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
@@ -25,17 +24,6 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
-    /*
-    // cascase 안쓴경우
-    persist(itemA)
-    persist(itemB)
-    persist(itemC)
-    persist(order)
-
-    // cascade 쓴경우
-    persist(order) 만 해도 된다.
-
-     */
 
     @OneToOne(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
