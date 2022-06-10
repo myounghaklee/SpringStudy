@@ -8,14 +8,14 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class SimpleOrderQueryDto {
+public class OrdersimpleQueryDto {
     private Long orderId;
     private String name;
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
     private Address address;
 
-    public SimpleOrderQueryDto(Order order) {
+    public OrdersimpleQueryDto(Order order) {
         orderId = order.getId();
         name = order.getMember().getName();
         orderDate = order.getOrderDate();
