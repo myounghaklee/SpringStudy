@@ -15,12 +15,14 @@ public class OrdersimpleQueryDto {
     private OrderStatus orderStatus;
     private Address address;
 
-    public OrdersimpleQueryDto(Order order) {
-        orderId = order.getId();
-        name = order.getMember().getName();
-        orderDate = order.getOrderDate();
-        orderStatus = order.getStatus();
-        address = order.getDelivery().getAddress();
+
+
+    public OrdersimpleQueryDto(Long orderId, String name, LocalDateTime orderDate ,OrderStatus orderStatus, Address address) {
+        this.name = name;
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.address = address;
     }
 
 }
