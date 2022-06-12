@@ -49,7 +49,7 @@ public class OrderSimpleApiController {
 
     @GetMapping("api/v4/simple-orders")
     public List<OrdersimpleQueryDto> ordersV4(){
-        return orderRepository.findOrdersDtos();
+        return orderRepository.findOrderDtos();
     }
 
     @Data
@@ -59,6 +59,8 @@ public class OrderSimpleApiController {
         private LocalDateTime orderDate;
         private OrderStatus orderStatus;
         private Address address;
+
+
     }
 
 }
