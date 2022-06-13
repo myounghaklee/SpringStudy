@@ -38,6 +38,7 @@ public class OrderSimpleApiController {
                 .collect(Collectors.toList());
     }
 
+    //재사용성 높음
     @GetMapping("api/v3/simple-orders")
     public List<SimpleOrderDto> ordersV3() {
         List<Order> orders = orderRepository.findAllwithMemberDelivery();
@@ -48,6 +49,7 @@ public class OrderSimpleApiController {
         return list;
     }
 
+    //재사용성 낮음 
     @GetMapping("api/v4/simple-orders")
     public List<OrdersimpleQueryDto> ordersV4(){
         return orderRepository.findOrderDtos();
