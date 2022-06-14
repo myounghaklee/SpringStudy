@@ -6,6 +6,7 @@ import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,13 +43,14 @@ public class OrderApiController {
         return collect;
     }
 
+    @Getter
     static class OrderDto{
         private Long orderId;
         private String name;
         private LocalDateTime orderDate;
         private OrderStatus orderStatus;
         private Address address;
-        private List<OrderItem> orderItems;
+        private List<OrderItemDto> orderItems;
 
         public OrderDto(Order o){
             this.orderId = o.getId();
@@ -56,7 +58,22 @@ public class OrderApiController {
             this.orderDate = o.getOrderDate();
             this.orderStatus = o.getStatus();
             this.address = o.getDelivery().getAddress();
-            this.orderItems = o.getOrderItems();
+            this.orderItems = o.getOrderItems().stream()
+                    .map(OrderItemDto::new)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    @Getter
+    static class OrderItemDto{
+        private String itemName;
+        private int orderPrice;
+        private int count;
+
+        public OrderItemDto(OrderItem oi){
+            itemName = oi.getItem().getName();
+            orderPrice = oi.getOrderPrice();
+            count = oi.getCount();
         }
     }
 }
