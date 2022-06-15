@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -53,6 +54,20 @@ public class OrderApiController {
         return collect;
 
     }
+
+    @GetMapping("/api/v3.1/orders")
+    public List<OrderDto> ordersV3_page(@RequestParam(value = "offset", defaultValue = "0")int offset,
+                                        @RequestParam(value = "offset", defaultValue = "100")int limit){
+        List<Order> orders = orderRepository.findAllwithMemberDelivery(offset,limit);
+
+        List<OrderDto> collect = orders.stream()
+                .map(OrderDto::new)
+                .collect(Collectors.toList());
+
+        return collect;
+
+    }
+
 
     @Getter
     static class OrderDto{
