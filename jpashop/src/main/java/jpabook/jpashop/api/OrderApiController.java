@@ -73,16 +73,8 @@ public class OrderApiController {
 
     //JPAㅇㅔ서 DTO 직접조회
     @GetMapping("/api/v4/orders")
-    public List<OrderQueryDto> ordersV4(@RequestParam(value = "offset", defaultValue = "0")int offset,
-                                        @RequestParam(value = "offset", defaultValue = "100")int limit){
-        List<Order> orders = orderRepository.findAllwithMemberDelivery(offset,limit);
-
-        List<OrderDto> collect = orders.stream()
-                .map(OrderDto::new)
-                .collect(Collectors.toList());
-
-        return collect;
-
+    public List<OrderQueryDto> ordersV4(){
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
 
