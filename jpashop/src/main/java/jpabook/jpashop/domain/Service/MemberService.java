@@ -1,8 +1,7 @@
 package jpabook.jpashop.domain.Service;
 
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.repository.MemberRepository;
-import lombok.AllArgsConstructor;
+import jpabook.jpashop.repository.MemberRepositoryOld;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepositoryOld memberRepository;
     /*
     회원가입
      */
