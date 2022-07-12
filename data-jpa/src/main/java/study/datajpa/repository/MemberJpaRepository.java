@@ -20,5 +20,5 @@ public class MemberJpaRepository {
     public Member findById(Long id){
         return em.find(Member.class, id);
     }
-
+//commit test
 }
