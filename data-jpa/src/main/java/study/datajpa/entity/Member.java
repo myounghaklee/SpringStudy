@@ -15,11 +15,16 @@ public class Member {
     private Long id;
     private String username;
     private int age;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 
     public Member(String name){
         this.username = name;
+    }
+
+    public void changeTeam(Team team){
+        this.team = team;
+        team.getMembers().add(this);
     }
 }
