@@ -53,8 +53,8 @@ class MemberRepositoryTest {
     @Test
     @DisplayName("colection binding test")
     void findByNames(){
-        Member m1 = new Member("aaa", 1-);
-        Member m2 = new Member("bbb", 1-);
+        Member m1 = new Member("aaa", 12);
+        Member m2 = new Member("bbb", 13);
         memberRepository.save(m1);
         memberRepository.save(m2);
 
