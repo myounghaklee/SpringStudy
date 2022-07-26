@@ -26,6 +26,7 @@ class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
     @Autowired TeamRepository teamRepository;
+    @Autowired MemberJpaRepository memberJpaRepository;
     @Test
     public void testMember(){
         Member member = new Member("enzo");
@@ -62,6 +63,27 @@ class MemberRepositoryTest {
         for(Member m : result){
             System.out.println(m);
         }
+
+    }
+
+    @Test
+    void paging(){
+        memberRepository.save(new Member("member1", 1));
+        memberRepository.save(new Member("member2", 1));
+        memberRepository.save(new Member("member3", 12));
+        memberRepository.save(new Member("member4", 14));
+        memberRepository.save(new Member("member5", 1));
+        memberRepository.save(new Member("member6", 1));
+
+        int age = 1;
+        int offset =0;
+        int limit =3;
+
+        List<Member>members = memberJpaRepository.findByPage(age, offset,limit);
+        int cnt = (int) memberJpaRepository.totalCount(1);
+
+        assertEquals(4, members.size());
+        assertEquals(4, cnt);
 
     }
 
