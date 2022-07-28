@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import study.datajpa.Dto.MemberDto;
@@ -74,6 +76,8 @@ class MemberRepositoryTest {
         memberRepository.save(new Member("member4", 14));
         memberRepository.save(new Member("member5", 1));
         memberRepository.save(new Member("member6", 1));
+
+        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.DESC, "username"));
 
         int age = 1;
         int offset =0;
