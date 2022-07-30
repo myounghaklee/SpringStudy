@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.InstanceOfAssertFactories.spliterator;
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -77,11 +78,11 @@ class MemberRepositoryTest {
         memberRepository.save(new Member("member5", 1));
         memberRepository.save(new Member("member6", 1));
 
-        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.DESC, "username"));
 
         int age = 1;
         int offset =0;
         int limit =3;
+        PageRequest pageRequest = PageRequest.of(0,3, Sort.by(Sort.Direction.DESC, "username"));
 
         List<Member>members = memberJpaRepository.findByPage(age, offset,limit);
         int cnt = (int) memberJpaRepository.totalCount(1);
