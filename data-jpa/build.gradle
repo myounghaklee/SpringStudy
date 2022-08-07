@@ -30,7 +30,7 @@ dependencies {
 	}
 
 }
-
+// spy6 주석 의존성
 tasks.named('test') {
 	useJUnitPlatform()
 }
