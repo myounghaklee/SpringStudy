@@ -1,9 +1,11 @@
 package study.datajpa.entity;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import java.time.LocalDateTime;
 
+@MappedSuperclass
 public class JpaBaseEntity {
     @Column
     private LocalDateTime createdDate;
