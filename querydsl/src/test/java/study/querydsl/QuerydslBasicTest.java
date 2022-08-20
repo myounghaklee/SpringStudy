@@ -126,4 +126,17 @@ public class QuerydslBasicTest {
         assertThat(mem5.getUsername()).isEqualTo("member5");
 
     }
+
+    @Test
+    void paging1(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        QueryResults<Member> resutl = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetchResults();
+
+        assertThat(resutl.getTotal()).isEqualTo(4);
+    }
 }
