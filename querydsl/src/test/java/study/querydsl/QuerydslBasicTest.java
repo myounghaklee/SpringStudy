@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static study.querydsl.entity.QMember.member;
+import static study.querydsl.entity.QTeam.team;
 
 @SpringBootTest
 @Transactional
@@ -138,5 +139,57 @@ public class QuerydslBasicTest {
                 .fetchResults();
 
         assertThat(resutl.getTotal()).isEqualTo(4);
+    }
+
+    /*
+    teamA에 속한 모든 회원 조회
+     */
+    @Test
+    void join(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .join(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
+
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("member1", "member2");
+
+    }
+
+    @Test
+    void leftJoin(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .leftJoin(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
+
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("member1", "member2");
+
+    }
+
+    /*
+    연관 관계 없을때 join_theta
+    회원의 이름이 팀 이름과 같은 회원 조회
+     */
+    @Test
+    void theta_Join(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .leftJoin(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
+
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("member1", "member2");
+
     }
 }
