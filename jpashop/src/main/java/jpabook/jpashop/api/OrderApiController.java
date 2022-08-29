@@ -26,6 +26,11 @@ public class OrderApiController {
     private final OrderRepository orderRepository;
     private final OrderQueryRepository orderQueryRepository;
 
+
+    /**
+     * entity 직접 노출
+     * @return
+     */
     @GetMapping("api/v1/orders")
     public List<Order> orderV1(){
         List<Order> list = orderRepository.findAllByString(new OrderSearch());
