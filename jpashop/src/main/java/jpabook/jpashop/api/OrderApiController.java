@@ -116,6 +116,7 @@ public class OrderApiController {
         }
     }
 
+    //DTO
     @Getter
     static class OrderItemDto{
         private String itemName;
