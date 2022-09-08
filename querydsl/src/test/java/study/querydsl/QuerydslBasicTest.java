@@ -1,6 +1,7 @@
 package study.querydsl;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -192,4 +193,24 @@ public class QuerydslBasicTest {
                 .containsExactly("member1", "member2");
 
     }
+
+    /**
+     * 회원과 팀을 조인하면서 팀이름이 teamA인 팀만 조인, 회원은 모두조회
+     * JPQL : select m, t from Member m left join m.team t on t.name ='teamA'
+     */
+
+    @Test
+    public void join_on_filtering(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Tuple> result =queryFactory.select(member, team)
+                .from(member)
+                .leftJoin(member.team, team).on(team.name.eq("teamA"))
+                .fetch();
+
+        for(Tuple t : result){
+            System.out.println("result : " + t);
+        }
+    }
+
+
 }
