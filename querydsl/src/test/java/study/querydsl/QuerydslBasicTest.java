@@ -1,6 +1,7 @@
 package study.querydsl;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
 
 import javax.persistence.EntityManager;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,6 +64,7 @@ public class QuerydslBasicTest {
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
     }
+
     @Test
     void startQuerydsl_v2() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
@@ -77,7 +78,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    void resultFetch(){
+    void resultFetch() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Member> fetch = queryFactory
                 .selectFrom(member)
@@ -108,7 +109,7 @@ public class QuerydslBasicTest {
     2에서 회원 이름이 없으면 마지막에 출력( nulls last)
      */
     @Test
-    void sort(){
+    void sort() {
         em.persist(new Member(null, 100));
         em.persist(new Member("memeber5", 100));
         em.persist(new Member("memeber6", 100));
@@ -129,7 +130,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    void paging1(){
+    void paging1() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         QueryResults<Member> resutl = queryFactory
                 .selectFrom(member)
@@ -145,7 +146,7 @@ public class QuerydslBasicTest {
     teamA에 속한 모든 회원 조회
      */
     @Test
-    void join(){
+    void join() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Member> result = queryFactory
                 .selectFrom(member)
@@ -160,7 +161,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    void leftJoin(){
+    void leftJoin() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Member> result = queryFactory
                 .selectFrom(member)
@@ -179,7 +180,7 @@ public class QuerydslBasicTest {
     회원의 이름이 팀 이름과 같은 회원 조회
      */
     @Test
-    void theta_Join(){
+    void theta_Join() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Member> result = queryFactory
                 .selectFrom(member)
@@ -192,4 +193,63 @@ public class QuerydslBasicTest {
                 .containsExactly("member1", "member2");
 
     }
+
+    /**
+     * 회원과 팀을 조인하면서 팀이름이 teamA인 팀만 조인, 회원은 모두조회
+     * JPQL : select m, t from Member m left join m.team t on t.name ='teamA'
+     */
+
+    @Test
+    public void join_on_filtering() {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Tuple> result = queryFactory.select(member, team)
+                .from(member)
+                .leftJoin(member.team, team).on(team.name.eq("teamA"))
+                .fetch();
+
+        for (Tuple t : result) {
+            System.out.println("result : " + t);
+        }
+    }
+
+    /**
+     * 연관관계 없는 엔티티 외부조인
+     * 예) 회원의 이름과 팀의 이름이 같은 대상 외부조인
+     * JPQL : select m, t from member m left join team t on m.username = t.name
+     * SQL : select m.*, t.* from member m left join Team t on m.username = t.name
+     *
+     * @throws Exception
+     */
+    @Test
+    void join_on_no_relation() throws Exception {
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+        em.persist(new Member("teamC"));
+
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+
+        List<Tuple> result = queryFactory
+                .select(member, team)
+                .from(member)
+                .leftJoin(team).on(member.username.eq(team.name))
+                .fetch();
+
+        for (Tuple t : result) {
+            System.out.println("tuple : " + t);
+        }
+    }
+
+    /**
+     * 페치조인 미적용 테스트 코드
+     * 지연로딩으로 member, team sql 쿼리가 가각 실행 되는 코드
+     */
+    @Test
+    void fetchJoinNo() throws Exception{
+        em.flush();
+        em.clear();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+
+        Member findMember = queryFactory
+    }
+
 }
