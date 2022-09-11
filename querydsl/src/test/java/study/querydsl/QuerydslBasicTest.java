@@ -13,6 +13,7 @@ import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,6 +25,8 @@ import static study.querydsl.entity.QTeam.team;
 public class QuerydslBasicTest {
     @Autowired
     EntityManager em;
+
+    EntityManagerFactory emf;
 
     @BeforeEach
     public void before() {
@@ -250,6 +253,28 @@ public class QuerydslBasicTest {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
         Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
+        boolean loadded = emf.getPersistenceUnitUtil().isLoaded(findMember.getTeam());
+        assertThat(loadded).as("패치조인 미적용").isFalse();
+    }
+
+    @Test
+    void fetchJoinUse() throws Exception{
+        em.flush();
+        em.clear();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .join(member.team, team).fetchJoin()
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
+        boolean loadded = emf.getPersistenceUnitUtil().isLoaded(findMember.getTeam());
+        assertThat(loadded).as("패치조인 미적용").isFalse();
     }
 
 }
