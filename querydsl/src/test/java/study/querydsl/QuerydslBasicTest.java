@@ -305,7 +305,7 @@ public class QuerydslBasicTest {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Member> result = queryFactory
                 .selectFrom(member)
-                .where(member.age.eq(
+                .where(member.age.goe(
                         JPAExpressions
                                 .select(memberSub.age.avg())
                                 .from(memberSub)
@@ -313,5 +313,25 @@ public class QuerydslBasicTest {
                 .fetch();
         assertThat(result).extracting("age").containsExactly(30,40);
     }
+
+    /**
+     * 나이가 20-40 사이인 회원 조회
+     */
+    @Test
+    void subQueryIn(){
+        QMember memberSub = new QMember("memberSub");
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.in(
+                        JPAExpressions
+                                .select(memberSub.age)
+                                .from(memberSub)
+                                .where(memberSub.age.gt(10))
+                ))
+                .fetch();
+        assertThat(result).extracting("age").containsExactly(20,30,40);
+    }
+
 
 }
