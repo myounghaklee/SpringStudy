@@ -278,6 +278,9 @@ public class QuerydslBasicTest {
         assertThat(loadded).as("패치조인 미적용").isFalse();
     }
 
+    /**
+     * 나이가 가장 많은 회원 조회
+     */
     @Test
     void subQuery(){
         QMember memberSub = new QMember("memberSub");
@@ -292,4 +295,23 @@ public class QuerydslBasicTest {
                 .fetch();
         assertThat(result).extracting("age").containsExactly(40);
     }
+
+    /**
+     * 나이가 평균인 회원 조회
+     */
+    @Test
+    void subQueryGoe(){
+        QMember memberSub = new QMember("memberSub");
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(
+                        JPAExpressions
+                                .select(memberSub.age.avg())
+                                .from(memberSub)
+                ))
+                .fetch();
+        assertThat(result).extracting("age").containsExactly(30,40);
+    }
+
 }
