@@ -2,6 +2,7 @@ package study.querydsl;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import study.querydsl.dto.MemberDto;
 import study.querydsl.entity.Member;
 import study.querydsl.entity.QMember;
 import study.querydsl.entity.Team;
@@ -30,6 +32,8 @@ public class QuerydslBasicTest {
 
     EntityManagerFactory emf;
 
+    JPAQueryFactory queryFactory;
+
     @BeforeEach
     public void before() {
         Team teamA = new Team("teamA");
@@ -45,6 +49,8 @@ public class QuerydslBasicTest {
         em.persist(member2);
         em.persist(member3);
         em.persist(member4);
+
+        queryFactory = new JPAQueryFactory(em);
     }
 
     @Test
@@ -375,6 +381,79 @@ public class QuerydslBasicTest {
                 .fetch();
         for(String s : result ){
             System.out.println("s = " + s);
+        }
+    }
+
+    @Test
+    void simpleProjection(){
+        List<String> result = queryFactory.select(member.username)
+                .from(member)
+                .fetch();
+
+        //Member 객체 타입도 한개의 프로젝션이라고 한다
+        List<Member> resultMember = queryFactory.select(member)
+                .from(member)
+                .fetch();
+
+        for(Member s : resultMember){
+            System.out.println("s = : "+ s);
+        }
+    }
+
+    @Test
+    void tupleProjection(){
+        List<Tuple> result = queryFactory.select(member.username, member.age)
+                .from(member)
+                .fetch();
+
+        for(Tuple t : result){
+            String username =  t.get(member.username);
+            Integer age = t.get(member.age);
+            System.out.println("name = : "+ username + " age : = " + age);
+        }
+    }
+    @Test
+    void findDtoByJPQL(){
+        List<MemberDto> result = em.createQuery("select new study.querydsl.dto.MemberDto(m.username, m.age) from Member m", MemberDto.class)
+                .getResultList();
+        System.out.println(result);
+    }
+    @Test
+    void findDtoBySetter(){
+        List<MemberDto> result = queryFactory
+                .select(Projections.bean(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+        for(MemberDto dto : result){
+            System.out.println(" dto : " + dto);
+        }
+    }
+
+    @Test
+    void findDtoByField(){
+        List<MemberDto> result = queryFactory
+                .select(Projections.fields(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+        for(MemberDto dto : result){
+            System.out.println(" dto : " + dto);
+        }
+    }
+
+    @Test
+    void findDtoByConstructor(){
+        List<MemberDto> result = queryFactory
+                .select(Projections.constructor(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+        for(MemberDto dto : result){
+            System.out.println(" dto : " + dto);
         }
     }
 }
