@@ -2,6 +2,7 @@ package study.querydsl;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -333,5 +334,47 @@ public class QuerydslBasicTest {
         assertThat(result).extracting("age").containsExactly(20,30,40);
     }
 
+    /**
+     * case 문 사용하여 조회
+     */
+    @Test
+    void simpleCaseQuery(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<String> result = queryFactory
+                .select(member.age
+                        .when(10).then("열살")
+                        .when(20).then("스무살")
+                        .when(30).then("늙")
+                        .otherwise("더 늙ㅠㅠㅠ"))
+                .from(member)
+                .fetch();
+    }
 
+    @Test
+    void complexCaseQuery(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        List<String> resutl = queryFactory
+                .select(new CaseBuilder()
+                        .when(member.age.between(0,20)).then("0-20살")
+                        .otherwise("늙~~~~!!"))
+                .from(member)
+                .fetch();
+
+    }
+
+    /**
+     * 문자 더하기
+     */
+    @Test
+    void concatQuery(){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        //{userName}_{age}
+        List<String> result = queryFactory
+                .select(member.username.concat("_").concat(member.age.stringValue()))
+                .from(member)
+                .fetch();
+        for(String s : result ){
+            System.out.println("s = " + s);
+        }
+    }
 }
