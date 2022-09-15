@@ -6,6 +6,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -531,4 +532,13 @@ public class QuerydslBasicTest {
                 .execute();
     }
 
+    @Test
+    void sqlFuction(){
+        List<String> result = queryFactory
+                .select(Expressions.stringTemplate("function('replace', {0},{1},{2})",
+                        member.username, "member", "M"))
+                .from(member)
+                .fetch();
+
+    }
 }
