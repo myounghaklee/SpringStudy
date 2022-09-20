@@ -21,7 +21,4 @@ public class Mypage {
     @Column(name = "directory")
     List<File> files;
 
-    
-
-
 }
