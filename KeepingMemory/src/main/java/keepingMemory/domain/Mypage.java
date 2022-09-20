@@ -2,7 +2,6 @@ package keepingMemory.domain;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,8 @@ public class Mypage {
 
     @Column(name = "directory")
     List<File> files;
+
+    
 
 
 }
