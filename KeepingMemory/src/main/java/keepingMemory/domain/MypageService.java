@@ -1,2 +1,5 @@
-package keepingMemory.domain;public class MypageService {
+package keepingMemory.domain;
+
+public class MypageService {
+
 }

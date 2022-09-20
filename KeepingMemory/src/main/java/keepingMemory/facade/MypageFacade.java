@@ -1,2 +1,5 @@
-package keepingMemory.facade;public class MypageFacade {
+package keepingMemory.facade;
+
+public class MypageFacade {
+
 }
