@@ -39,7 +39,7 @@ public class MypageService {
             Path targetPath = directory.resolve(fileName).normalize();
 
             // 파일이 이미 존재하는지 확인하여 존재한다면 오류를 발생하고 없다면 저장한다.
-            Assert.state(!Files.exists(targetPath), fileName + " File alerdy exists.");
+            Assert.state(!Files.exists(targetPath), fileName + " File already exists.");
             file.transferTo(targetPath);
         }
     }
