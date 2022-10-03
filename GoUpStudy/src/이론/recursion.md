@@ -35,4 +35,28 @@ public class explicitSearch(){
     }
 }
 ```
-위 코드에서처럼 begin, end변수를 명시적으로 표현해주는것이 ;재귛마수를 이해할대 좋은 방법이다.
+위 코드에서처럼 begin, end변수를 명시적으로 표현해주는것이 재귀함수를 이해할때 좋은 방법이다.
+
+### Binary Search
+이진탐색은 기본적으로 배열에 데이터가 정렬되어있다는 가정하에 탐색하는 방법이다. 
+```java
+public class binaryTest() {
+
+    public static int binarySearch(String[] items, String target, int begin, int end) {
+        if (begin > end) return -1;
+        else {
+            int middle = (begin + end) / 2;
+            int compResult = target.compareTo(items[middle]);
+            if (compResult == 0) return middle;
+            else if (compResult < 0) { // 내가 찾으려고 하는 타겟이 더 작을 때 
+                return binarySearch(items, target, begin, middle - 1);
+            }
+            else
+                return binarySearch(items, target, middle + 1, end);
+        }
+    }
+}
+```
+
+
+
