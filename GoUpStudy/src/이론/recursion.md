@@ -77,6 +77,7 @@ boolean findPath(x,y)
 ### counting cells in a blob
 blob은 2차원 배열(0,1로 이루어진)이 주어졌을때 연속된 셀들을 말한다.
 조건으로 보통 상하죄우, 대각선까지 를 이어진 셀이라고 할 수 있다.
+<재귀를 사용하는 접근법 
 
 
 
