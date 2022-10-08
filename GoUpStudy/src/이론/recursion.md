@@ -58,5 +58,27 @@ public class binaryTest() {
 }
 ```
 
+### 미로찾기
+```
+//수도코트 
+boolean findPath(x,y)
+    if (x,y)is the exit
+        return ture;
+    else 
+        mark(x,y) as a visited cell;
+        for each neighbouring cell(x',y')of(x,y) do
+            if(x',y') is on the pathway and  not visited
+                if findPath(x',y')
+                    return true;
+        return false;
+```
+
+
+### counting cells in a blob
+blob은 2차원 배열(0,1로 이루어진)이 주어졌을때 연속된 셀들을 말한다.
+조건으로 보통 상하죄우, 대각선까지 를 이어진 셀이라고 할 수 있다.
+
+
+
 
 
