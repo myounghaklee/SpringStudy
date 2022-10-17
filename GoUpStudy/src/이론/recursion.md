@@ -88,12 +88,7 @@ blob은 2차원 배열(0,1로 이루어진)이 주어졌을때 연속된 셀들�
         그 픽셀이 속한 blob의 크기를 카운트하여 카운터에 더해줌
     카운터를 반환.
 ```
-```java
-private static int backround_color = 0;
-private static int image_color =1;
-private static int already_counted = 2;
 
-```
 
 
 
