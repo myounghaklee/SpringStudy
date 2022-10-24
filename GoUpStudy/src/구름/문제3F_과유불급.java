@@ -16,8 +16,25 @@ public class 문제3F_과유불급 {
      */
     public static Range getBestRange(int n, int m, int[] cards, Range[] ranges) {
         Range answer = ranges[0];
+        //누적합 배령릉 생성하고
+        //누적합 배열을 활용해서 구간합들을 순회
+        long [] rangeSum = new long[n+1];
+        rangeSum[0] = 0;
+        for(int i =0; i<=n; i++){
+            //rangeSum을 채우자
+            //rangeSum[i] = cards[1] ~ cards[i]까지의 합을 마한다.
+            rangeSum[i] = rangeSum[i-1] + cards[i];
+        }
 
-
+        //누적합 배열을 활용해서 구간합들을 순회
+        // 그 중 가장 구간합이 큰 후보 선정
+        for(Range r : ranges){
+            //r.totalPoin = cards[r.left] ~cards[r.right]의 구간합
+            r.totalPoint = rangeSum[r.right]  = rangeSum[r.left-1];
+            if(answer.totalPoint <r.totalPoint){
+                answer = r;
+            }
+        }
         return answer;
     }
 
