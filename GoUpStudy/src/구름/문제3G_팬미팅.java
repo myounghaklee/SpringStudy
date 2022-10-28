@@ -1,6 +1,6 @@
-package 구름;
+import java.lang.*;
+import java.util.*;
 
-import java.util.Scanner;
 
 public class 문제3G_팬미팅 {
     public static final Scanner scanner = new Scanner(System.in);
@@ -46,6 +46,13 @@ class FrequencyTable
      */
     void addBirthDate(int birthDate)
     {
+        int count = frequency[birthDate];
+        if(count == 0){
+            this.uniqueElements+=1;
+        }else if(count ==1){
+            this.uniqueElements -=1;
+        }
+        this.frequency[birthDate] +=1;
 
     }
 
