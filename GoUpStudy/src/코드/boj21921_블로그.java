@@ -20,5 +20,14 @@ public class boj21921_블로그 {
         for(int i =0; i<N ; i++){
             input[i] = Integer.parseInt(st.nextToken());
         }
+        int ans = Integer.MIN_VALUE;
+        for(int i = 0; i<N-X; i++){
+
+            for(int j = 0 ; j<X; j++){
+
+            }
+
+        }
+
     }
 }
