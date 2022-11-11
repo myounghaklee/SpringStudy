@@ -1,7 +1,12 @@
 package java8to18;
 
+import java.util.function.Function;
+
 public class Foo {
     public static void main(String[] args) {
         RunSomething runSomething = () -> System.out.println("hello");
+
+        Function<Integer, Integer> plus10 = (i) -> i +10;
+        System.out.println(plus10.apply(1));
     }
 }
