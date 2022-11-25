@@ -14,14 +14,15 @@ public class 최소직사각형_완탐 {
     public static int solution(int[][] sizes) {
         int seroMax = Integer.MIN_VALUE;
         int garoMax = Integer.MIN_VALUE;
+
         for (int i = 0; i < sizes.length; i++) {
             if(sizes[i][0] < sizes[i][1]){
                 int tmp = sizes[i][0];
                 sizes[i][0] = sizes[i][1];
                 sizes[i][1] = tmp;
             }
-
         }
+
         for (int i = 0; i < sizes.length; i++) {
             seroMax = sizes[i][0] > seroMax ? sizes[i][0] : seroMax;
         }

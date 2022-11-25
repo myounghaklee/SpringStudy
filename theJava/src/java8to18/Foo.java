@@ -10,3 +10,4 @@ public class Foo {
         System.out.println(plus10.apply(1));
     }
 }
+///////안녕하세요 이명학이라고 합니다. ㅋㅋㅋㅋ오 좋은데 개좋아 시발 이거 무어ㅑ 아 키돕

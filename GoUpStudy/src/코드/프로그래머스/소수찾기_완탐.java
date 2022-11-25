@@ -8,12 +8,12 @@ public class 소수찾기_완탐 {
     /*
     Idea :
     1. 문자열 -> int 전환
-    2. 순열로 모든경우의수 탐색
+    2. 순열로 모든경우의수 탐색 nPr  r: 1~N
     3. 기저조건에서 소수인지 판단
      */
 
     public static void main(String[] args) {
-        System.out.println(solution("17"));
+        //System.out.println(solution("17"));
 
     }
 
@@ -24,10 +24,15 @@ public class 소수찾기_완탐 {
         // 순열을 위한 데이터 세팅(String -> int array)
         char [] charArry = numbers.toCharArray();
         int [] arry = new int[charArry.length];
+
+
         boolean isVisited[] = new boolean[arry.length];
+
         for(int i =0 ;i< charArry.length; i++){
             arry[i] = Integer.parseInt(String.valueOf(charArry[i]));
         }
+
+
         for(int i = 1; i>arry.length; i++){
             permu();
 
